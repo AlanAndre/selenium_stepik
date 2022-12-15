@@ -1,10 +1,10 @@
 from selenium.webdriver.common.by import By
 
 
-class MainPageLocators():
+class MainPageLocators:
     LOGIN_LINK = (By.CSS_SELECTOR, "#login_link")
 
-class LoginPageLocators():
+class LoginPageLocators:
     LOGIN_URL = "https://selenium1py.pythonanywhere.com/ru/accounts/login/"
     LOGIN_EMAIL = (By.ID, "id_login-username")
     LOGIN_PASSWORD = (By.ID, "id_login-password")
@@ -13,3 +13,11 @@ class LoginPageLocators():
     REGISTER_PASSWORD1 = (By.ID, "id_registration-password1")
     REGISTER_PASSWORD2 = (By.ID, "id_registration-password2")
     REGISTER_BUTTON = (By.XPATH, "//button[contains(text(),'Зарегистрироваться')]")
+
+class ProductPageLocators:
+    ADD_TO_CART_BTN = (By.XPATH, "//button[contains(text(),'Добавить в корзину')]")
+
+    PRODUCT_NAME = (By.CSS_SELECTOR, "div.product_main h1")
+    CART_PRODUCT_NAME = (By.CSS_SELECTOR, "div.alertinner ")
+    PRODUCT_PRICE = (By.CSS_SELECTOR, ".product_main .price_color")
+    CART_PRICE = (By.CSS_SELECTOR, ".alert-info .alertinner strong")
