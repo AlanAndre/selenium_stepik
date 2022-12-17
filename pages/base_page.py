@@ -1,7 +1,6 @@
 from selenium.common.exceptions import NoSuchElementException
 
-from pages.locators import BasePageLocators, CartPageLocators
-
+from .locators import BasePageLocators, CartPageLocators
 
 class BasePage():
     def __init__(self, browser, url, timeout=30):
@@ -31,7 +30,7 @@ class BasePage():
         assert self.is_element_present(*BasePageLocators.LOGIN_LINK), "Login link is not presented"
 
     def check_empty_cart(self):
-        assert "Ваша корзина пуста" in self.browser.find_element(*CartPageLocators.EMPTY_CART_CONTENTS).text
+        assert self.is_element_present(*CartPageLocators.EMPTY_CART_CONTENTS)
 
     def should_be_authorized_user(self):
         assert self.is_element_present(*BasePageLocators.USER_ICON), "User icon is not presented,"\

@@ -1,13 +1,14 @@
-import pytest
-
-from pages.login_page import LoginPage
-from .pages.product_page import ProductPage
-from .pages.locators import ProductPageLocators, CartPageLocators
-import time
 import random
+import time
 from string import ascii_letters, digits
 
-@pytest.mark.skip
+import pytest
+
+from .pages.locators import ProductPageLocators, CartPageLocators
+from .pages.login_page import LoginPage
+from .pages.product_page import ProductPage
+
+@pytest.mark.xfail
 def test_message_disappeared_after_adding_product_to_basket(browser):
     url = 'http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer0'
     page = ProductPage(browser, url)
@@ -16,7 +17,7 @@ def test_message_disappeared_after_adding_product_to_basket(browser):
     page.solve_quiz_and_get_code()
     assert page.is_disappeared(*ProductPageLocators.SUCCESS_BAR)
 
-@pytest.mark.skip
+
 class TestGuest:
     @staticmethod
     def _list_for_param_test() -> list[str]:
@@ -26,22 +27,12 @@ class TestGuest:
         links.insert(FAIL_TEST_NO, xlink)
         return links
 
-    @pytest.mark.parametrize('link', _list_for_param_test())
-    def test_guest_can_add_product_to_cart(self, browser, link):
-        url = f"http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer{link}"
-        page = ProductPage(browser, url)
-        page.open()
-        page.add_to_cart()
-        page.solve_quiz_and_get_code()
-        time.sleep(3)
-        page.check_name_in_cart()
-        page.check_price_in_cart()
-
     def test_guest_cant_see_success_message(self, browser):
         url = 'http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer0'
         page = ProductPage(browser, url)
         page.open()
         assert page.is_not_element_present(*ProductPageLocators.SUCCESS_BAR)
+
     @pytest.mark.skip
     def test_guest_cant_see_success_message_after_adding_product_to_cart(self, browser):
         url = 'http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer0'
@@ -50,18 +41,21 @@ class TestGuest:
         page.add_to_cart()
         page.solve_quiz_and_get_code()
         assert page.is_not_element_present(*ProductPageLocators.SUCCESS_BAR)
+
     def test_guest_should_see_login_link_on_product_page(self, browser):
         link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
         page = ProductPage(browser, link)
         page.open()
         page.should_be_login_link()
 
+    @pytest.mark.need_review
     def test_guest_can_go_to_login_page_from_product_page(self, browser):
         link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
         page = ProductPage(browser, link)
         page.open()
         page.go_to_login_page()
 
+    @pytest.mark.need_review
     def test_guest_cant_see_product_in_basket_opened_from_product_page(self, browser):
         link = "http://selenium1py.pythonanywhere.com"
         page = ProductPage(browser, link)
@@ -70,6 +64,7 @@ class TestGuest:
         assert not page.is_element_present(*CartPageLocators.CART_CONTENTS)
         page.check_empty_cart()
 
+    @pytest.mark.need_review
     @pytest.mark.parametrize('link', _list_for_param_test())
     def test_guest_can_add_product_to_cart(self, browser, link):
         url = f"http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer{link}"
@@ -80,6 +75,7 @@ class TestGuest:
         time.sleep(3)
         page.check_name_in_cart()
         page.check_price_in_cart()
+
 
 class TestUserAddToBasketFromProductPage:
     @pytest.fixture(scope='function', autouse=True)
@@ -97,6 +93,7 @@ class TestUserAddToBasketFromProductPage:
         page.open()
         assert page.is_not_element_present(*ProductPageLocators.SUCCESS_BAR)
 
+    @pytest.mark.need_review
     def test_user_can_add_product_to_cart(self, browser):
         url = f"http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer0"
         page = ProductPage(browser, url)

@@ -1,7 +1,7 @@
+pswds.py
 .idea/
-.pytest_cahe
 *.__pycache__/
 __pycache__
 env/
 geckodriver.log
-pswds.py
+.mypy_cache
