@@ -23,3 +23,7 @@ class ProductPageLocators:
     CART_PRICE = (By.XPATH, "//div[@class='alertinner ']/p/strong")
 
     SUCCESS_BAR = (By.XPATH, "//div[@class='alert alert-safe alert-noicon alert-success  fade in']")
+
+class BasePageLocators():
+    LOGIN_LINK = (By.CSS_SELECTOR, "#login_link")
+    # LOGIN_LINK_INVALID = (By.CSS_SELECTOR, "#login_link_inc")

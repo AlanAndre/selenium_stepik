@@ -29,11 +29,11 @@ def test_guest_cant_see_success_message_after_adding_product_to_cart(browser):
     page.solve_quiz_and_get_code()
     assert page.is_not_element_present(*ProductPageLocators.SUCCESS_BAR)
 
-def test_guest_cant_see_success_message(browser):
-    url = 'http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer0'
-    page = ProductPage(browser, url)
-    page.open()
-    assert page.is_not_element_present(*ProductPageLocators.SUCCESS_BAR)
+# def test_guest_cant_see_success_message(browser):
+#     url = 'http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer0'
+#     page = ProductPage(browser, url)
+#     page.open()
+#     assert page.is_not_element_present(*ProductPageLocators.SUCCESS_BAR)
 
 @pytest.mark.skip
 def test_message_disappeared_after_adding_product_to_basket(browser):
@@ -43,3 +43,15 @@ def test_message_disappeared_after_adding_product_to_basket(browser):
     page.add_to_cart()
     page.solve_quiz_and_get_code()
     assert page.is_disappeared(*ProductPageLocators.SUCCESS_BAR)
+
+def test_guest_should_see_login_link_on_product_page(browser):
+    link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
+    page = ProductPage(browser, link)
+    page.open()
+    page.should_be_login_link()
+
+def test_guest_can_go_to_login_page_from_product_page(browser):
+    link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
+    page = ProductPage(browser, link)
+    page.open()
+    page.go_to_login_page()
