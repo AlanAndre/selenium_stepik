@@ -24,7 +24,7 @@ def browser(request):
 
     else:
         options_firefox = OptionsFirefox()
-        options_firefox.add_argument("--headless")
+        # options_firefox.add_argument("--headless")
         if user_language:
             options_firefox.set_preference("intl.accept_languages", user_language)
         s = Service(GeckoDriverManager().install())
