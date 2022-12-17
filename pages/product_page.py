@@ -21,8 +21,8 @@ class ProductPage(BasePage):
         answer = str(math.log(abs((12 * math.sin(float(x))))))
         alert.send_keys(answer)
         alert.accept()
-        WebDriverWait(self.browser, 60).until(EC.alert_is_present())
         try:
+            WebDriverWait(self.browser, 10).until(EC.alert_is_present())
             alert = self.browser.switch_to.alert
             alert_text = alert.text
             print(f"Your code: {alert_text}")
@@ -31,11 +31,11 @@ class ProductPage(BasePage):
             print("No second alert presented")
 
     def check_name_in_cart(self):
-        product_name = self.browser.find_element(*ProductPageLocators.PRODUCT_NAME).text
+        product_name = self.browser.find_elements(*ProductPageLocators.PRODUCT_NAME)[0].text
         message = self.browser.find_element(*ProductPageLocators.CART_PRODUCT_NAME).text
-        assert product_name in message
+        assert product_name == message
 
     def check_price_in_cart(self):
         product_price = self.browser.find_element(*ProductPageLocators.PRODUCT_PRICE).text
         message_product_price = self.browser.find_element(*ProductPageLocators.CART_PRICE).text
-        assert product_price in message_product_price
+        assert product_price == message_product_price

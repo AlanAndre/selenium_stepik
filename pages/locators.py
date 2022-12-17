@@ -17,7 +17,7 @@ class LoginPageLocators:
 class ProductPageLocators:
     ADD_TO_CART_BTN = (By.XPATH, "//button[contains(text(),'Добавить в корзину')]")
 
-    PRODUCT_NAME = (By.CSS_SELECTOR, "div.product_main h1")
-    CART_PRODUCT_NAME = (By.CSS_SELECTOR, "div.alertinner ")
-    PRODUCT_PRICE = (By.CSS_SELECTOR, ".product_main .price_color")
-    CART_PRICE = (By.CSS_SELECTOR, ".alert-info .alertinner strong")
+    PRODUCT_NAME = (By.XPATH, "//div[@class='col-sm-6 product_main']/h1")
+    CART_PRODUCT_NAME = (By.XPATH, "//div[@class='alertinner ']/strong")
+    PRODUCT_PRICE = (By.XPATH, "//p[@class='price_color']")
+    CART_PRICE = (By.XPATH, "//div[@class='alertinner ']/p/strong")
