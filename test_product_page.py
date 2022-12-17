@@ -65,9 +65,8 @@ class TestGuest:
         page.check_empty_cart()
 
     @pytest.mark.need_review
-    @pytest.mark.parametrize('link', _list_for_param_test())
-    def test_guest_can_add_product_to_cart(self, browser, link):
-        url = f"http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer{link}"
+    def test_guest_can_add_product_to_cart(self, browser):
+        url = f"http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer0"
         page = ProductPage(browser, url)
         page.open()
         page.add_to_cart()
