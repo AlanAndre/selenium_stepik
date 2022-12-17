@@ -21,3 +21,5 @@ class ProductPageLocators:
     CART_PRODUCT_NAME = (By.XPATH, "//div[@class='alertinner ']/strong")
     PRODUCT_PRICE = (By.XPATH, "//p[@class='price_color']")
     CART_PRICE = (By.XPATH, "//div[@class='alertinner ']/p/strong")
+
+    SUCCESS_BAR = (By.XPATH, "//div[@class='alert alert-safe alert-noicon alert-success  fade in']")
