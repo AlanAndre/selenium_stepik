@@ -32,3 +32,7 @@ class BasePage():
 
     def check_empty_cart(self):
         assert "Ваша корзина пуста" in self.browser.find_element(*CartPageLocators.EMPTY_CART_CONTENTS).text
+
+    def should_be_authorized_user(self):
+        assert self.is_element_present(*BasePageLocators.USER_ICON), "User icon is not presented,"\
+                                                                     " probably unauthorised user"

@@ -23,6 +23,7 @@ class ProductPageLocators:
 class BasePageLocators():
     LOGIN_LINK = (By.CSS_SELECTOR, "#login_link")
     CART_LINK = (By.XPATH, "//a[@class='btn btn-default']")
+    USER_ICON = (By.CSS_SELECTOR, ".icon-user")
 
 class CartPageLocators():
     CART_CONTENTS = (By.XPATH, "//form[@id='basket_formset']")
